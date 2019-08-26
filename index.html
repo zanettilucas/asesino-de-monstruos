@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Asesino de Monstruos</title>
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+    <div id="app">
+        <section class="row">
+            <div class="small-6 columns">
+                <h1 class="text-center">TU</h1>
+                <div class="curarthbar">
+                    <div class="curarthbar text-center" style="background-color: goldenrod; margin: 0; color: white;">
+                    </div>
+                </div>
+            </div>
+            <div class="small-6 columns">
+                <h1 class="text-center">MONSTRUO</h1>
+                <div class="curarthbar">
+                    <div class="curarthbar text-center"
+                        style="background-color: rgb(0, 81, 128); margin: 0; color: white;">
+             </div>
+                </div>
+            </div>
+        </section>
+        <section class="row controls">
+            <div class="small-12 columns">
+                <button id="start-game">
+                    EMPEZAR JUEGO NUEVO</button>
+            </div>
+        </section>
+        <section class="row controls" v-else>
+            <div class="small-12 columns">
+                <button id="atacar" >ATACAR</button>
+                <button id="ataque-especial" >ATAQUE ESPECIAL</button>
+                <button id="curar" >CURAR</button>
+                <button id="rendirse" >RENDIRSE</button>
+            </div>
+        </section>
+        <section class="row log">
+            <div class="small-12 columns">
+
+                <ul>
+                    <li>
+                        
+                    </li>
+                </ul>
+
+            </div>
+        </section>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
