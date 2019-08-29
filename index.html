@@ -12,18 +12,17 @@
     <div id="app">
         <section class="row">
             <div class="small-6 columns">
-                <h1 class="text-center">TU</h1>
+                <h1 class="text-center">Feminismo</h1>
                 <div class="curarthbar">
-                    <div class="curarthbar text-center" style="background-color: goldenrod; margin: 0; color: white;">
+                    <div class="curarthbar text-center" :style="actualizarBarra('blue',vida1)">
                     </div>
                 </div>
             </div>
             <div class="small-6 columns">
-                <h1 class="text-center">MONSTRUO</h1>
+                <h1 class="text-center">Patriarcado</h1>
                 <div class="curarthbar">
-                    <div class="curarthbar text-center"
-                        style="background-color: rgb(0, 81, 128); margin: 0; color: white;">
-             </div>
+                    <div class="curarthbar text-center" :style="actualizarBarra('yellow',vida2)">
+                    </div>
                 </div>
             </div>
         </section>
@@ -33,27 +32,85 @@
                     EMPEZAR JUEGO NUEVO</button>
             </div>
         </section>
-        <section class="row controls" v-else>
+        <section class="row controls">
             <div class="small-12 columns">
-                <button id="atacar" >ATACAR</button>
-                <button id="ataque-especial" >ATAQUE ESPECIAL</button>
-                <button id="curar" >CURAR</button>
-                <button id="rendirse" >RENDIRSE</button>
+                <button id="atacar" @click="atacar()">ATACAR</button>
+                <button id="ataque-especial" @click="atacarEsp()">ATAQUE ESPECIAL</button>
+                <button id="curar" @click="curar()">CURAR</button>
+                <button id="rendirse" @click="rendir()">RENDIRSE</button>
             </div>
         </section>
         <section class="row log">
             <div class="small-12 columns">
 
                 <ul>
-                    <li>
-                        
+                    <li v-for="accion in acciones">
+                        {{ accion }}
                     </li>
                 </ul>
 
             </div>
         </section>
     </div>
-    <script src="app.js"></script>
 </body>
 
 </html>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            vida1: 100,
+            vida2: 100,
+            acciones: []
+        },
+        computed: {
+            vidaMax() {
+                return this.vida1 <= 100 ? true : false;
+            }
+        },
+        methods: {
+            vidaDie(alma) {
+                return alma >= 0 ? true : false;
+            },
+            actualizarBarra(color, vida) {
+                return `background-color: ${color}; margin: 0; color: white; width:${vida}%`
+            },
+            atacar() {
+                this.vidaDie(this.vida1) ? this.vida1 -= this.ataquesRandom(10) : alert('cagaste');
+                this.vidaDie(this.vida2) ? this.vida2 -= this.ataquesRandom(5) : alert('muy bien papu');
+            },
+            atacarEsp() {
+                this.vidaDie(this.vida1) ? this.vida1 -= this.ataquesRandom(10) : alert('cagaste');
+                this.vidaDie(this.vida2) ? this.vida2 -= this.ataquesRandom(15) : alert('muy bien papu');
+            },
+            curar() {
+                this.vidaMax ? this.vida1 -= this.ataquesRandom(-11) : this.vida1 = 100;
+                this.vidaDie(this.vida1) ? this.vida1 -= this.ataquesRandom(10) : alert('cagaste');
+            },
+            rendir() {
+                this.vida1 = 100;
+                this.vida2 = 100;
+                this.acciones = [];
+            },
+            ataquesRandom(tope) {
+                cant = Math.floor((Math.random() * tope) + 1);
+                this.acciones.push('mira que loco: ' + cant)
+                return cant;
+            },
+/*            accionesBonitas(cant){
+                let bonita
+                if(cant < 0){
+                    "te curaste:"
+                }else if(){
+
+                }else if(){
+
+                }else{
+
+                }
+            }
+ */       }
+    });
+</script>
